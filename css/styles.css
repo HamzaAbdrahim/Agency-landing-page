@@ -1,0 +1,539 @@
+@charset "utf-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a, button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input, textarea {
+    -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+    all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+    color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+    content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+    display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable="false"])) {
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+    -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+    all: revert;
+}
+
+
+
+:root {
+    /* Primary Colors */
+    --soft-red: hsl(7, 99%, 70%);
+    --yellow: hsl(51, 100%, 49%);
+    --dark-desaturated-cyan: hsl(167, 40%, 24%);
+    --dark-blue: hsl(198, 62%, 26%);
+    --dark-moderate-cyan: hsl(168, 34%, 41%);
+  
+    /* Neutral Colors */
+    --very-dark-desaturated-blue: hsl(212, 27%, 19%);
+    --very-dark-grayish-blue: hsl(213, 9%, 39%);
+    --dark-grayish-blue: hsl(232, 10%, 55%);
+    --grayish-blue: hsl(210, 4%, 67%);
+    --white: hsl(0, 0%, 100%);
+    
+    /* FONT FAMILY */
+    
+    --ff-Fraunces:"Fraunces", serif;
+    --ff-Barlow:"Barlow", sans-serif;
+    
+}
+
+/* Layout */
+body {
+    font-family: var(--ff-Barlow);
+    font-size: 18px;
+    line-height: 1.5;
+    color: white;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  
+  /* Responsive */
+  @media (min-width: 901px) {
+    .SweetCherry__box,
+    .Orange__box {
+      padding-bottom: 5rem !important;
+    }
+  }
+  @media (max-width: 901px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 2rem !important;
+        background-color: white;
+        color: var(--dark-grayish-blue) !important;
+        min-width: 25rem;
+        padding-block:3rem ;
+        position: absolute;
+        margin-top: 2rem;
+        left: -100%;
+        top: -100%;
+        transition: all .5s;
+      }
+      .nav-links.active {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50% , -50%);
+    }
+    .nav-links::after {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        border:10px solid;
+        border-color: transparent white white transparent;
+        position: absolute;
+        top:-1rem;
+        right: 0;
+        background-color: transparent;
+        z-index: 2;
+
+    }
+    .responsive__Navbutton {
+        display: block !important;
+      }
+    .button__link {
+        background-color: var(--yellow) !important;
+        color: black;
+      }
+      .hero__bg {
+        background-image: url(../images/mobile/image-header.jpg) !important;
+        }
+  }
+  @media (max-width: 375px) {
+    .hero__br {
+        display: block;
+      }
+  }
+  
+
+  /* start the navbar */
+
+  nav {
+
+    display: flex;
+  
+    justify-content: space-between;
+  
+    align-items: center;
+  
+    min-height: 18vh;
+
+  }
+  nav .navbar__titel,
+  .footer__titel  {
+    font-weight: 900;
+    text-transform: lowercase;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+  }
+  
+  .nav-links {
+  
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  
+  }
+  
+  .nav-links li {
+  
+    list-style: none;
+  
+  }
+  
+  .nav-links a,
+  .socialMedia__box a {
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 1.5rem;  
+    padding: 14px 16px;
+  
+  }
+  .button__link {
+    background-color: var(--white);
+    color: black;
+    padding: 16px 33px !important;
+    border: none;
+    border-radius: 33px;
+    font-family: var(--ff-Fraunces);
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links a:hover:not(.active) {
+  
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+
+  
+  }
+  
+  .nav-links li a.active {
+  
+    background-color: #4caf50;
+  
+  }
+
+
+  .full__page {
+    width: 100%;
+    height: 100svh;
+  } 
+  .hero__bg {
+    background-repeat: no-repeat;
+    background-image: url(../images/desktop/image-header.jpg);
+    background-size: cover;
+  }
+
+  .blue__bg {
+    background-color: var(--dark-blue);
+  }
+  .responsive__Navbutton {
+    display: none;
+  }
+  .responsive__Navbutton img {
+    height: 2rem;
+  }
+
+  .hero__container {
+    display: grid;
+    place-items: center;
+    margin-top: 5rem;
+    gap: 6rem;
+  }
+
+  .hero__container .hero__titel {
+    font-family: var(--ff-Fraunces);
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    text-align: center;
+  }
+  .hero__br {
+    display: none;
+  }
+  .thore__col__responsive {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .two__col__responsive {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width:776px) {
+    .testimonials__container {
+      justify-content: center !important;
+    }
+    .thore__col__responsive {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .two__col__responsive {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .order__one__responsive {
+      order:2 !important;
+    }
+    .order__two__responsive {
+      order:1 !important;
+    }
+    .text__center__responsive {
+      text-align: center !important;
+    }
+    .SweetCherry__box {
+      background-image: url(../images/mobile/image-graphic-design.jpg) !important;
+      background-size: contain !important;
+    }
+    .Orange__box {
+      background-image: url(../images/mobile/image-photography.jpg) !important;
+      background-size: contain !important;
+    }
+  }
+  .servies__box {
+    display: grid;
+    place-items: center;
+  }
+  .servies__box .servies__titel {
+    font-family: var(--ff-Fraunces);
+    color: var(--very-dark-desaturated-blue);
+    font-weight: 900;
+    text-transform: capitalize;
+    font-size: 3rem;
+  }
+  .servies__box .servies__discrption {
+    font-weight: 600;
+    color: var(--dark-grayish-blue);
+    margin-block: 2rem;
+    max-width: 33rem;
+    font-size: 1.3rem;
+
+  }
+  .servies__box .more__link {
+    font-family: var(--ff-Fraunces);
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .servies__box .more__link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--yellow);
+    height: 8px;
+    border-radius: 5px;
+    z-index: -1;
+    opacity: .4;
+  }
+
+  .order__one__responsive {
+    order:1 ;
+  }
+  .order__two__responsive {
+    order:2 ;
+  }
+  .text__center__responsive {
+    text-align: left;
+  }
+  .full__img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+  .SweetCherry__box {
+    background-repeat: no-repeat;
+    background-image: url(../images/desktop/image-graphic-design.jpg);
+    background-size: cover;
+    display: grid;
+    justify-content: center;
+    align-items: end;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .SweetCherry__box h3 {
+    color: var(--dark-desaturated-cyan);
+    font-family: var(--ff-Fraunces);
+    font-weight: 800;
+    font-size:clamp(2.5rem ,4vw ,3rem );
+    text-transform: capitalize;
+    margin-bottom:clamp(1rem ,2vw ,2rem );
+
+  }
+  .SweetCherry__box p {
+    color: var(--dark-desaturated-cyan);
+    font-family: var(--ff-Barlow);
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    opacity: .7;
+    max-width: 35rem;
+  }
+
+  .Orange__box {
+    background-repeat: no-repeat;
+    background-image: url(../images/desktop/image-photography.jpg);
+    background-size: cover;
+    display: grid;
+    justify-content: center;
+    align-items: end;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .Orange__box h3 {
+    color: var(--dark-blue);
+    font-family: var(--ff-Fraunces);
+    font-weight: 800;
+    text-transform: capitalize;
+    font-size:clamp(2.5rem ,4vw ,3rem );
+    margin-bottom:clamp(1rem ,2vw ,2rem );
+
+
+  }
+  .Orange__box p {
+    color: var(--very-dark-desaturated-blue);
+    font-family: var(--ff-Barlow);
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    opacity: .7;
+    max-width: 35rem;
+  }
+
+.testimonials__container {
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Heading styling */
+.testimonials__titel {
+  font-family: var(--ff-Fraunces);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: var(--grayish-blue);
+  text-transform: capitalize;
+  letter-spacing: 3px;
+}
+
+/* Individual testimonial box styling */
+.testimonials__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Image styling */
+.testimonials__box img {
+  width: 80px;
+  aspect-ratio: 1;
+  border-radius: 50%; /* Circular image */
+  margin-bottom: 15px;
+}
+
+/* Testimonial description styling */
+.testimonials__discrption {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--very-dark-grayish-blue);
+  margin-block: 2rem;
+  max-width: 21rem;
+}
+
+/* Client name styling */
+.testimonials__box span {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333333;
+  margin-bottom: 5px;
+}
+.testimonials__box .role {
+  color: var(--grayish-blue);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+footer {
+  background-color: var(--dark-moderate-cyan);
+  color: var(--dark-desaturated-cyan) !important;
+}
+
+footer .footer__titel {
+  text-align: center;
+}
+
+.socialMedia__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+}
